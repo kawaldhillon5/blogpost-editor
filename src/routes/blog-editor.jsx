@@ -1,11 +1,11 @@
-import { Link, redirect, useLoaderData } from "react-router-dom";
+import { Link, redirect, useLoaderData, useSubmit, Form } from "react-router-dom";
 import { getBlog, postBlogData } from "../helper-functions/functions";
-import HtmlParser from "react-html-parser";
+import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
 
 export async function action({request, params}){
     const formData = await request.formData();
-    await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")});
+    await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
     return redirect(`/editor/blog/${params.blogId}`)
 }
 
@@ -17,7 +17,7 @@ export async function loader({params}) {
 export default function EditBlog() {
     const {blog}= useLoaderData();
     const editorRef = useRef(null);
-
+    const submit = useSubmit();
     const getMCEData = () => {
         if (editorRef.current) {
           return editorRef.current.getContent();
@@ -29,7 +29,7 @@ export default function EditBlog() {
             <Form method="post">
                 <div id="title_edit_div">
                     <label htmlFor="edit_title_input">Blog Title</label>
-                    <input id="edit_title_input" name="blog_title_edit" type="text" value={blog.title}/>
+                    <input id="edit_title_input" name="blog_title_edit" type="text" defaultValue ={blog.title}/>
                 </div>
                 <div id="body_edit_div">
                 <Editor
@@ -64,8 +64,10 @@ export default function EditBlog() {
                 <button type="submit"
                  onClick={(e)=> {
                     e.preventDefault();
-                    let blogBody = new FormData();
-                    FormData.append("blog_body_edit", getMCEData());
+                    let formData = new FormData();
+                    formData.append("blog_body_edit", getMCEData());
+                    formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                    submit(formData, {method: "post"});
                  }}
                 >Save</button>
             </Form>

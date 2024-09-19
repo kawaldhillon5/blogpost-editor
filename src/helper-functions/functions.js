@@ -12,7 +12,6 @@ export async function getMyBlogs(){
 }
 
 export async function getBlog(blogId){
-    
     return await axios.get(`${baseURL}editor/blog/${blogId}`)
     .then((response) => {
         return response.data.post;
@@ -22,12 +21,23 @@ export async function getBlog(blogId){
     });
 }
 
-export async function postBlogData(data){
-    return axios.post(`${baseURL}/editor/updateblog`, data)
+export async function postBlogData(data, blogId){
+    return axios.post(`${baseURL}editor/updateBlog/${blogId}`, data)
     .then((response) => {
-        return response.data;
+        console.log(response.data.id);
+        return response.data.id;
     })
     .catch((error)=> {
+        console.log(error);
+    })
+}
+
+export async function createNewEmptyBlog(){
+    return axios.get(`${baseURL}editor/newBlog`)
+    .then((response) => {
+        return response.data.id;
+    })
+    .catch((error) => {
         console.log(error);
     })
 }

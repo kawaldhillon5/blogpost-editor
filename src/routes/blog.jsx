@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Form, redirect } from "react-router-dom";
 import { getBlog } from "../helper-functions/functions";
 import HtmlParser from "react-html-parser";
 
@@ -16,13 +16,13 @@ export default function Blog(){
     return (
 
         <div id="blog_div">  
-            <p>
+            <div>
                 {blog.title}   {blog.date_created} 
                 <Form method="post">
                     <button type="submit">Edit</button>
                 </Form>
-            </p>
-            <p>{HtmlParser(blog.body)}</p>
+            </div>
+            <div id="blog_body_div">{HtmlParser(blog.body)}</div>
             <p>{`${blog.author.first_name} ${blog.author.last_name}`}</p>
         </div>
 

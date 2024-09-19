@@ -7,7 +7,7 @@ import {
 import './index.css'
 import Root from "./routes/root";
 import ErrorPage from "./erro-page";
-import MyBlogs, {loader as myBlogsLoader} from "./routes/myBlogs";
+import MyBlogs, {loader as myBlogsLoader, action as rootAction} from "./routes/myBlogs";
 import Blog, {loader as blogLoader, action as blogAction} from "./routes/blog";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/blog-editor";
 
@@ -20,7 +20,8 @@ const router = createBrowserRouter([
       {
         path: "editor/MyBlogPosts",
         element: <MyBlogs />,
-        loader: myBlogsLoader
+        loader: myBlogsLoader,
+        action: rootAction
       },
       {
         path: "editor/blog/:blogId",
