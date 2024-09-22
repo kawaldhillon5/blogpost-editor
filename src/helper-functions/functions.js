@@ -22,7 +22,7 @@ export async function getBlog(blogId){
 }
 
 export async function postBlogData(data, blogId){
-    return axios.post(`${baseURL}editor/updateBlog/${blogId}`, data)
+    return await axios.post(`${baseURL}editor/updateBlog/${blogId}`, data)
     .then((response) => {
         console.log(response.data.id);
         return response.data.id;
@@ -33,11 +33,21 @@ export async function postBlogData(data, blogId){
 }
 
 export async function createNewEmptyBlog(){
-    return axios.get(`${baseURL}editor/newBlog`)
+    return await axios.get(`${baseURL}editor/newBlog`)
     .then((response) => {
         return response.data.id;
     })
     .catch((error) => {
         console.log(error);
+    })
+}
+
+export async function logIn(username, password){
+    return await axios.post(`${baseURL}authenticate/logIn`, {username: username, password: password})
+    .then((response)=>{
+        return response;
+    })
+    .catch((error)=>{
+        return error.response;
     })
 }

@@ -10,7 +10,8 @@ import ErrorPage from "./erro-page";
 import MyBlogs, {loader as myBlogsLoader, action as rootAction} from "./routes/myBlogs";
 import Blog, {loader as blogLoader, action as blogAction} from "./routes/blog";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/blog-editor";
-
+import Index from "./routes";
+import LogIn, {action as logInAction} from "./routes/logIn";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
+        element: <Index />
+      },
+      {
+        path: "authenticate/logIn",
+        element: <LogIn />,
+        action: logInAction
+      },
+      {
+
+      },
+      { 
         path: "editor/MyBlogPosts",
         element: <MyBlogs />,
         loader: myBlogsLoader,
