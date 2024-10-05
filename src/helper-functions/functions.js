@@ -1,6 +1,8 @@
 import axios from "axios";
 const baseURL = "http://localhost:3000/";
 
+axios.defaults.withCredentials = true;
+
 export async function getMyBlogs(){
    return await axios.get(`${baseURL}editor/myBlogPosts`)
     .then((response) => {
@@ -51,3 +53,15 @@ export async function logIn(username, password){
         return error.response;
     })
 }
+
+export async function getUser(){
+    console.log("function user run")
+    return await axios.get(`${baseURL}authenticate/user`)
+    .then((response) =>{
+        return response.data
+    })
+    .catch((error) =>{
+        return error.data;
+    });
+}
+

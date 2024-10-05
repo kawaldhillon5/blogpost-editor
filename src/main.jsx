@@ -12,6 +12,8 @@ import Blog, {loader as blogLoader, action as blogAction} from "./routes/blog";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/blog-editor";
 import Index from "./routes";
 import LogIn, {action as logInAction} from "./routes/logIn";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,19 +34,25 @@ const router = createBrowserRouter([
       },
       { 
         path: "editor/MyBlogPosts",
-        element: <MyBlogs />,
+        element: <ProtectedRoute>
+          <MyBlogs />
+        </ProtectedRoute>,
         loader: myBlogsLoader,
         action: rootAction
       },
       {
         path: "editor/blog/:blogId",
-        element: <Blog />,
+        element: <ProtectedRoute>
+          <Blog />
+        </ProtectedRoute>,
         loader: blogLoader,
         action: blogAction,
       },
       {
         path: "editor/blogEdit/:blogId",
-        element: <EditBlog />,
+        element: <ProtectedRoute>
+          <EditBlog />
+        </ProtectedRoute>,
         loader: editBlogLoader,
         action: editBlogAction
       }

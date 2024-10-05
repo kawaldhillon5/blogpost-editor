@@ -1,4 +1,4 @@
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import { logIn } from "../helper-functions/functions";
 
 export async function action({request, params}) {
@@ -10,13 +10,14 @@ export async function action({request, params}) {
         }
     } catch (error){
         console.log(error.message);
-        return 
+        return error.message;
     }
     return redirect('/');
 }
 
 export default function LogIn(){
-    console.log('rendered');
+    let error = useActionData()
+
     return (
         <div id="log_in_div">
             <Form method="post" id="log_in_form">
@@ -27,6 +28,9 @@ export default function LogIn(){
                     <input type="password" name="password"/>
                 </div>
                 <button type="submit">Log In</button>
+                <span>   </span>
+                <span>{error}</span>
+
             </Form>
         </div>
     )
