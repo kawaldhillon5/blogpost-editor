@@ -24,7 +24,6 @@ export default function ProtectedRoute({children}) {
     useEffect(()=>{
         async function fun(){
             const res = await user;
-            console.log(res);
             if(res === null) {
                 navigate('/authenticate/logIn', {replace: true});
             }

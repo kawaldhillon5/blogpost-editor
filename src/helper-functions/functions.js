@@ -3,8 +3,8 @@ const baseURL = "http://localhost:3000/";
 
 axios.defaults.withCredentials = true;
 
-export async function getMyBlogs(){
-   return await axios.get(`${baseURL}editor/myBlogPosts`)
+export async function getMyBlogs(user){
+   return await axios.get(`${baseURL}editor/myBlogPosts/${user.user}`)
     .then((response) => {
         return response.data.blogs;
     })
@@ -34,8 +34,8 @@ export async function postBlogData(data, blogId){
     })
 }
 
-export async function createNewEmptyBlog(){
-    return await axios.get(`${baseURL}editor/newBlog`)
+export async function createNewEmptyBlog(user){
+    return await axios.get(`${baseURL}editor/newBlog/${user.user}`)
     .then((response) => {
         return response.data.id;
     })
@@ -55,10 +55,9 @@ export async function logIn(username, password){
 }
 
 export async function getUser(){
-    console.log("function user run")
     return await axios.get(`${baseURL}authenticate/user`)
     .then((response) =>{
-        return response.data
+        return response.data;
     })
     .catch((error) =>{
         return error.data;

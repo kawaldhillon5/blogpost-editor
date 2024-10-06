@@ -1,13 +1,16 @@
 import { Link, redirect, useLoaderData, Form } from "react-router-dom";
-import { createNewEmptyBlog, getMyBlogs } from "../helper-functions/functions";
+import { createNewEmptyBlog, getMyBlogs, getUser } from "../helper-functions/functions";
 
 export async function action() {
-    const blogId = await createNewEmptyBlog();
+    const user = await getUser();
+    const blogId = await createNewEmptyBlog(user);
     return redirect(`../editor/blogEdit/${blogId}`);
 }
 
 export async function loader(){
-    const blogs = await getMyBlogs();
+    const user = await getUser();
+    const blogs = await getMyBlogs(user);
+    console.log(blogs);
     return {blogs};
 }
 export default function MyBlogs(){

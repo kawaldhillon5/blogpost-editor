@@ -28,7 +28,6 @@ export default function LogIn(){
                     <input type="password" name="password"/>
                 </div>
                 <button type="submit">Log In</button>
-                <span>   </span>
                 <span>{error}</span>
 
             </Form>
