@@ -54,13 +54,24 @@ export async function logIn(username, password){
     })
 }
 
+export async function LogOut(){
+    return await axios.post(`${baseURL}authenticate/logOut`)
+    .then((res)=> {
+        return res.data.message;
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+    
+}
+
 export async function getUser(){
     return await axios.get(`${baseURL}authenticate/user`)
     .then((response) =>{
         return response.data;
     })
     .catch((error) =>{
-        return error.data;
+        console.log(error.data);
     });
 }
 

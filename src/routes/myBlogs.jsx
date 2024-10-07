@@ -10,7 +10,6 @@ export async function action() {
 export async function loader(){
     const user = await getUser();
     const blogs = await getMyBlogs(user);
-    console.log(blogs);
     return {blogs};
 }
 export default function MyBlogs(){

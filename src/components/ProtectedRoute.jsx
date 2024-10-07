@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUser } from "../helper-functions/functions";
 
-export default function ProtectedRoute({children}) {
+export default function ProtectedRoute() {
     const res = getUser()
     const user = func();
     const navigate = useNavigate();
@@ -10,7 +10,6 @@ export default function ProtectedRoute({children}) {
     async function func(){
         let userVal = await res;
         try {
-            console.log(userVal);
             if(userVal.user === null) {
               return null;
             } else {
@@ -31,5 +30,5 @@ export default function ProtectedRoute({children}) {
     },[user ,navigate]);
 
 
-    return children;
+    return <Outlet/>
 }

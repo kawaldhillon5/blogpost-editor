@@ -1,7 +1,31 @@
-import { Form, Link, Outlet} from "react-router-dom";
+import { Form, Link, Outlet, useLoaderData, Navigate, useNavigate} from "react-router-dom";
+import { getUser, LogOut } from "../helper-functions/functions";
+import { useEffect, useState } from "react";
 
 
 export default function Root(){
+    const [isLogged, setIsLogged] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        async function func() {
+            const u = await getUser();
+            if(u.user){
+                setIsLogged(true);
+            }   
+        } func();
+    },)
+
+    const handleLogIn = () => {
+        navigate('authenticate/logIn');
+    }
+
+    const handleLogOut = async ()=> {
+        await LogOut();
+        setIsLogged(false);
+        navigate('/')
+    }
+
     return (
         <>
             <div id="header">
@@ -13,6 +37,7 @@ export default function Root(){
                     <Link to={`/editor/myBlogPosts`}>My Blogs</Link>
                     <Link to={`/editor/allBlogRequests`}>Blog Requests</Link>
                     <Link to={`/editor/about`}>About</Link>
+                    {isLogged ? <button onClick={handleLogOut}>Log Out</button> : <button onClick={handleLogIn}>Log In</button>}
                 </div>
             </div>
             <div id="content">
