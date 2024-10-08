@@ -17,6 +17,7 @@ export async function action({request, params}) {
 
 export default function LogIn(){
     let error = useActionData()
+    const navigate = useNavigate();
 
     return (
         <div id="log_in_div">
@@ -28,6 +29,7 @@ export default function LogIn(){
                     <input type="password" name="password"/>
                 </div>
                 <button type="submit">Log In</button>
+                <button type="button" onClick={()=>{navigate('../authenticate/signUp')}} >Sign Up!</button>
                 <span>{error}</span>
 
             </Form>

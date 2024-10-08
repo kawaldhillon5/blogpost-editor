@@ -75,3 +75,13 @@ export async function getUser(){
     });
 }
 
+export async function postSignUpData(data) {
+    return axios.post(`${baseURL}authenticate/signUp`,{data : data})
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error.response
+    });
+}
+
