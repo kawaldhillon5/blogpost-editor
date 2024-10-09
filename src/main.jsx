@@ -13,7 +13,7 @@ import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./ro
 import Index, {loader as indexLoader} from "./routes";
 import LogIn, {action as logInAction} from "./routes/logIn";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SignUp, {action as signUpAction} from "./routes/signUp";
+import Requests from "./routes/requests";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +30,6 @@ const router = createBrowserRouter([
         path: "authenticate/logIn",
         element: <LogIn />,
         action: logInAction
-      },
-      {
-        path: "authenticate/signUp",
-        element:<SignUp />,
-        action: signUpAction,
       },
       { 
         element: <ProtectedRoute />,
@@ -56,6 +51,10 @@ const router = createBrowserRouter([
             element: <EditBlog />,
             loader: editBlogLoader,
             action: editBlogAction
+          },
+          {
+            path: "editor/requests",
+            element: <Requests />
           }
         ] 
       }

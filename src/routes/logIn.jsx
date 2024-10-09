@@ -29,7 +29,6 @@ export default function LogIn(){
                     <input type="password" name="password"/>
                 </div>
                 <button type="submit">Log In</button>
-                <button type="button" onClick={()=>{navigate('../authenticate/signUp')}} >Sign Up!</button>
                 <span>{error}</span>
 
             </Form>

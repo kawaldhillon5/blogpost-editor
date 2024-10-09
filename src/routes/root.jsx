@@ -35,7 +35,7 @@ export default function Root(){
                 </form>
                 <div id="header_links">
                     <Link to={`/editor/myBlogPosts`}>My Blogs</Link>
-                    <Link to={`/editor/allBlogRequests`}>Blog Requests</Link>
+                    <Link to={`/editor/requests`}>Blog Requests</Link>
                     <Link to={`/editor/about`}>About</Link>
                     {isLogged ? <button onClick={handleLogOut}>Log Out</button> : <button onClick={handleLogIn}>Log In</button>}
                 </div>

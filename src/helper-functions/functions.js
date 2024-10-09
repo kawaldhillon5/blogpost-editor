@@ -76,12 +76,22 @@ export async function getUser(){
 }
 
 export async function postSignUpData(data) {
-    return axios.post(`${baseURL}authenticate/signUp`,{data : data})
+    return await axios.post(`${baseURL}authenticate/signUp`,{data : data})
     .then((response) => {
         return response;
     })
     .catch((error) => {
         return error.response
     });
+}
+
+export async function getEditorReqs() {
+    return await axios.get(`${baseURL}editor/requests`)
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error.response
+    });   
 }
 
