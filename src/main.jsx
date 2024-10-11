@@ -13,7 +13,7 @@ import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./ro
 import Index, {loader as indexLoader} from "./routes";
 import LogIn, {action as logInAction} from "./routes/logIn";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Requests from "./routes/requests";
+import Requests, {loader as reqsLoader} from "./routes/requests";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +54,8 @@ const router = createBrowserRouter([
           },
           {
             path: "editor/requests",
-            element: <Requests />
+            element: <Requests />,
+            loader: reqsLoader,
           }
         ] 
       }

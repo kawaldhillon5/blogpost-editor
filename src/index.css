@@ -107,3 +107,12 @@ button:focus-visible {
 #content {
   padding: 10%;
 }
+
+.radioReq {
+  display: none;
+}
+
+.labelActive{
+  border-radius: 3px;
+  border-bottom: 2px solid green ;
+}

@@ -85,13 +85,22 @@ export async function postSignUpData(data) {
     });
 }
 
-export async function getEditorReqs() {
-    return await axios.get(`${baseURL}editor/requests`)
+export async function getEditorReqs(user) {
+    return await axios.get(`${baseURL}editor/editorReqs`)
     .then((response) => {
-        return response;
+        return response.data;
     })
     .catch((error) => {
-        return error.response
+        return error
     });   
 }
 
+export async function postEditorReqChoice(id, choice) {
+    return await axios.post(`${baseURL}editor/editorReqChoice/${id}`, {data: {choice:choice}})
+    .then((response)=>{
+        return response.status
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+}

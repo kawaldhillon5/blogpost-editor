@@ -14,7 +14,7 @@ export async function loader(){
 }
 export default function MyBlogs(){
     const {blogs} = useLoaderData();
-    console.log(blogs);
+    
     return (
         <div id="all-blogs-div">
             {blogs.length ? (
