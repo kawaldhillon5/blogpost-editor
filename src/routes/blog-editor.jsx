@@ -1,11 +1,15 @@
 import { Link, redirect, useLoaderData, useSubmit, Form } from "react-router-dom";
-import { getBlog, postBlogData } from "../helper-functions/functions";
+import { getBlog, postBlogData, postFinishedblog } from "../helper-functions/functions";
 import { Editor } from "@tinymce/tinymce-react";
-import { useRef, useState } from "react";
+import { useRef} from "react";
 
 export async function action({request, params}){
     const formData = await request.formData();
-    await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
+    if(formData.get("save_button")){
+        await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
+    } else {
+        await postFinishedblog({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
+    }
     return redirect(`/editor/blog/${params.blogId}`)
 }
 
@@ -61,15 +65,26 @@ export default function EditBlog() {
                     }}
                 />
                 </div>
-                <button type="submit"
+                <button type="button"
                  onClick={(e)=> {
                     e.preventDefault();
                     let formData = new FormData();
                     formData.append("blog_body_edit", getMCEData());
                     formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                    formData.append("save_button", true);
                     submit(formData, {method: "post"});
                  }}
                 >Save</button>
+                <button type="button"
+                 onClick={(e)=> {
+                    e.preventDefault();
+                    let formData = new FormData();
+                    formData.append("blog_body_edit", getMCEData());
+                    formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                    formData.append("finish_button", true);
+                    submit(formData, {method: "post"});
+                 }}
+                >Finish</button>
             </Form>
         </div>
     )

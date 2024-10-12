@@ -5,9 +5,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Root from "./routes/root";
+import Root , {loader as rootLoader}from "./routes/root";
 import ErrorPage from "./erro-page";
-import MyBlogs, {loader as myBlogsLoader, action as rootAction} from "./routes/myBlogs";
+import MyBlogs, {loader as myBlogsLoader, action as blogsAction} from "./routes/myBlogs";
 import Blog, {loader as blogLoader, action as blogAction} from "./routes/blog";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/blog-editor";
 import Index, {loader as indexLoader} from "./routes";
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    loader: rootLoader,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
             path: "editor/MyBlogPosts",
             element: <MyBlogs />,
             loader: myBlogsLoader,
-            action: rootAction
+            action: blogsAction
           },
           {
             path: "editor/blog/:blogId",

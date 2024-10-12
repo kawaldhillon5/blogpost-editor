@@ -3,8 +3,8 @@ const baseURL = "http://localhost:3000/";
 
 axios.defaults.withCredentials = true;
 
-export async function getMyBlogs(user){
-   return await axios.get(`${baseURL}editor/myBlogPosts/${user.user}`)
+export async function getMyBlogs(){
+   return await axios.get(`${baseURL}editor/myBlogPosts`)
     .then((response) => {
         return response.data.blogs;
     })
@@ -26,7 +26,6 @@ export async function getBlog(blogId){
 export async function postBlogData(data, blogId){
     return await axios.post(`${baseURL}editor/updateBlog/${blogId}`, data)
     .then((response) => {
-        console.log(response.data.id);
         return response.data.id;
     })
     .catch((error)=> {
@@ -34,8 +33,18 @@ export async function postBlogData(data, blogId){
     })
 }
 
-export async function createNewEmptyBlog(user){
-    return await axios.get(`${baseURL}editor/newBlog/${user.user}`)
+export async function postFinishedblog(data, blogId) {
+    return await axios.post(`${baseURL}editor/finishBlog/${blogId}`, data)
+    .then((response) => {
+        return response.data.id;
+    })
+    .catch((error)=> {
+        console.log(error);
+    })
+}
+
+export async function createNewEmptyBlog(){
+    return await axios.get(`${baseURL}editor/newBlog`)
     .then((response) => {
         return response.data.id;
     })
@@ -104,3 +113,24 @@ export async function postEditorReqChoice(id, choice) {
         console.log(error);
     })
 }
+
+export async function getBlogRequests() {
+    return axios.get(`${baseURL}client/allBlogRequests`)
+    .then((response)=>{
+        return response.data.requests;
+    })
+    .catch((error)=>{
+        console.log(error);
+    });
+}
+
+export async function getPublishBlogRequests() {
+    return axios.get(`${baseURL}editor/publishBlogRequests`)
+    .then((response)=>{
+        return response.data.data;
+    })
+    .catch((error)=>{
+        console.log(error);
+    });
+}
+

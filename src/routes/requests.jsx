@@ -1,29 +1,32 @@
-import { useLoaderData, useNavigate, useSubmit } from "react-router-dom";
+import { useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
 import BlogReq from "../components/request-components.jsx/blogReq";
 import EditorReq from "../components/request-components.jsx/editorReq";
 import PublishBlogReq from "../components/request-components.jsx/publishBlogReq";
-import { getEditorReqs, getUser, postEditorReqChoice } from "../helper-functions/functions";
+import { getBlogRequests, getEditorReqs, getPublishBlogRequests, getUser, postEditorReqChoice } from "../helper-functions/functions";
 
 export async function loader() {
-    const user = await getUser()
-    const editorRequests = await getEditorReqs();
-    return {editorRequests};
+    // const editorRequests = await getEditorReqs();
+    const [editorRequests, blogRequests, publishBlogRequests] = await Promise.all([getEditorReqs(), getBlogRequests(), getPublishBlogRequests()]);
+    return {editorRequests, blogRequests, publishBlogRequests};
 }
 
 export default function Requests() {
+    const user = useOutletContext();
     const navigate = useNavigate();
-    const {editorRequests} = useLoaderData();
+    const {editorRequests, blogRequests, publishBlogRequests} = useLoaderData();
+    console.log(blogRequests);
     async function editorReqOnSubmitFunc (id, choice){
         const res  = await postEditorReqChoice(id, choice);
         console.log(res);
         res===200 ? navigate('../editor/requests'): null
         return;   
     }
+    
     return (
-        <>
-            <PublishBlogReq />
+        <>  
             <BlogReq />
-            <EditorReq reqs={editorRequests} submitFunc ={editorReqOnSubmitFunc} />
+            {user.isAdmin?<PublishBlogReq reqs={publishBlogRequests} />: null}
+            {user.isAdmin?<EditorReq reqs={editorRequests} submitFunc ={editorReqOnSubmitFunc} />: null}
         </>
     )
 }

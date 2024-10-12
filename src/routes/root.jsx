@@ -2,30 +2,37 @@ import { Form, Link, Outlet, useLoaderData, Navigate, useNavigate} from "react-r
 import { getUser, LogOut } from "../helper-functions/functions";
 import { useEffect, useState } from "react";
 
+export async function loader() {
+    const user = await getUser()
+    return {user}
+}
 
 export default function Root(){
     const [isLogged, setIsLogged] = useState(false);
+    const {user} = useLoaderData();
     const navigate = useNavigate();
 
     useEffect(()=>{
-        async function func() {
-            const u = await getUser();
+         function func() {
+            const u = user
             if(u.user){
                 setIsLogged(true);
-            }   
+            } else {
+                setIsLogged(false);
+            }
         } func();
-    },)
+    })
 
     const handleLogIn = () => {
         navigate('authenticate/logIn');
     }
 
     const handleLogOut = async ()=> {
-        await LogOut();
-        setIsLogged(false);
-        navigate('/')
+        LogOut().then(()=>{
+            setIsLogged(false);
+            navigate('/');
+        })
     }
-
     return (
         <>
             <div id="header">
@@ -41,7 +48,7 @@ export default function Root(){
                 </div>
             </div>
             <div id="content">
-                <Outlet />
+                <Outlet context={user}/>
             </div>
             <div id="footer">
                 <span>By</span>
