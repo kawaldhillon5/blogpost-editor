@@ -2,7 +2,7 @@ import { useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
 import BlogReq from "../components/request-components.jsx/blogReq";
 import EditorReq from "../components/request-components.jsx/editorReq";
 import PublishBlogReq from "../components/request-components.jsx/publishBlogReq";
-import { getBlogRequests, getEditorReqs, getPublishBlogRequests, getUser, postEditorReqChoice } from "../helper-functions/functions";
+import { getBlogRequests, getEditorReqs, getPublishBlogRequests, getUser, postEditorReqChoice, postPublishBlogRequest } from "../helper-functions/functions";
 
 export async function loader() {
     // const editorRequests = await getEditorReqs();
@@ -15,18 +15,19 @@ export default function Requests() {
     const navigate = useNavigate();
     const {editorRequests, blogRequests, publishBlogRequests} = useLoaderData();
     console.log(blogRequests);
+
     async function editorReqOnSubmitFunc (id, choice){
         const res  = await postEditorReqChoice(id, choice);
-        console.log(res);
         res===200 ? navigate('../editor/requests'): null
         return;   
     }
     
+   
     return (
-        <>  
+        <div id="main_req_div">  
             <BlogReq />
-            {user.isAdmin?<PublishBlogReq reqs={publishBlogRequests} />: null}
+            {user.isAdmin?<PublishBlogReq reqs={publishBlogRequests}/>: null}
             {user.isAdmin?<EditorReq reqs={editorRequests} submitFunc ={editorReqOnSubmitFunc} />: null}
-        </>
+        </ div>
     )
 }

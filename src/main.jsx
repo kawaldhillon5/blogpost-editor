@@ -14,6 +14,7 @@ import Index, {loader as indexLoader} from "./routes";
 import LogIn, {action as logInAction} from "./routes/logIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Requests, {loader as reqsLoader} from "./routes/requests";
+import BlogComponent, {loader as blogCompLoader} from "./components/blogComponent";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
             path: "editor/requests",
             element: <Requests />,
             loader: reqsLoader,
+          },
+          { 
+            path: "editor/publish/:reqId/blog/:blogId",
+            element: <BlogComponent ></BlogComponent>,
+            loader: blogCompLoader,
           }
         ] 
       }

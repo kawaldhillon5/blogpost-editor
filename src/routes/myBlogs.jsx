@@ -1,10 +1,18 @@
-import { Link, redirect, useLoaderData, Form } from "react-router-dom";
+import { Link, redirect, useLoaderData, Form, useActionData } from "react-router-dom";
 import { createNewEmptyBlog, getMyBlogs, getUser } from "../helper-functions/functions";
 
 export async function action() {
     
-    const blogId = await createNewEmptyBlog();
-    return redirect(`../editor/blogEdit/${blogId}`);
+    try{
+        const response = await createNewEmptyBlog();
+        console.log(response);
+        if(response.status === 404){
+            throw new Error(response.data)
+        }
+        return redirect(`../editor/blogEdit/${response.data.id}`);
+    } catch(err){
+        return err;
+    }
 }
 
 export async function loader(){
@@ -13,6 +21,7 @@ export async function loader(){
 }
 export default function MyBlogs(){
     const {blogs} = useLoaderData();
+    const error = useActionData();
     return (
         <div id="all-blogs-div">
             {blogs.length ? (
@@ -30,7 +39,7 @@ export default function MyBlogs(){
                 ):(
                     <div id="no_blogs_div">
                         <i>No Posts</i>
-                        <Form method="post"><button type="submit" id="new_blog_button">New</button></Form>
+                        <Form method="post"><button type="submit" id="new_blog_button">New</button></Form>{error ? <span>{error.message}</span> : null}
                     </div>
                 )
             }

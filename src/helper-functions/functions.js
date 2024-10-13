@@ -46,10 +46,10 @@ export async function postFinishedblog(data, blogId) {
 export async function createNewEmptyBlog(){
     return await axios.get(`${baseURL}editor/newBlog`)
     .then((response) => {
-        return response.data.id;
+        return response;
     })
     .catch((error) => {
-        console.log(error);
+        return error.response;
     })
 }
 
@@ -132,5 +132,15 @@ export async function getPublishBlogRequests() {
     .catch((error)=>{
         console.log(error);
     });
+}
+
+export async function postPublishBlogRequest(id, choice) {
+    return await axios.post(`${baseURL}editor/publishReqChoice/${id}`, {data: {choice:choice}})
+    .then((response)=>{
+        return response.status
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
 }
 
