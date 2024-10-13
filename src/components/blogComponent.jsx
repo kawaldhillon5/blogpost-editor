@@ -10,12 +10,13 @@ export async function loader(params) {
 }
 
 export default function BlogComponent() {
-    const navigate= useNavigate;
 
     const {reqId,blog} = useLoaderData();
+    const navi= useNavigate();
+
     async function publishReqOnSubmitFunc(id, choice) {
         const res = await postPublishBlogRequest(id, choice);
-        res===200 ? navigate('../editor/requests'): null
+        res===200 ? navi("../editor/requests"): null
         return;
     }
 

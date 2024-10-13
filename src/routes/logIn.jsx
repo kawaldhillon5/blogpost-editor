@@ -17,7 +17,6 @@ export async function action({request, params}) {
 
 export default function LogIn(){
     let error = useActionData()
-    const navigate = useNavigate();
 
     return (
         <div id="log_in_div">

@@ -5,18 +5,18 @@ export default function EditorReq({reqs, submitFunc}) {
     return (
         <div className="req_div" id="editor_req_div">
             <div className="req_div_title">Editor Requests</div>
-            <div id="editor_req_items_div">
+            <ul id="editor_req_items_div">
             {(reqs.reqs.length === 0) 
             ?
-                <i>No Request</i>
+                <li className="req_list_item">No Request</li>
             :   
                 reqs.reqs.map((req) =>(
-                    <li key={req._id}>
+                    <li className="editor_req_list_item" key={req._id}>
                         <ListItem req={req} submitFunc={submitFunc} ></ListItem>
                     </li>
                 ))
             }
-            </div>
+            </ul>
         </div>
     )
 }
@@ -34,9 +34,11 @@ function ListItem({req ,submitFunc}) {
 
     return(
         <>
-            <div className="editor_req_name">{req.firstName+" " +req.lastName}</div>
+            <div className="editor_req_top">
+                <div className="editor_req_name">{req.firstName+" " +req.lastName}</div>
+                <button className="editor_req_options_button" onClick={onClickFunc} >⫶</button>
+            </div>
             <div className="editor_req_email">{req.email}</div>
-            <button onClick={onClickFunc} >Options</button>
             {
                 options ? 
                 <AcceptReject req = {req._id} submitFunc={submitFunc} />
