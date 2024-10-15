@@ -2,6 +2,7 @@ import { Link, redirect, useLoaderData, useSubmit, Form } from "react-router-dom
 import { getBlog, postBlogData, postFinishedblog } from "../helper-functions/functions";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef} from "react";
+import "./blog-editor.css"
 
 export async function action({request, params}){
     const formData = await request.formData();
@@ -32,8 +33,12 @@ export default function EditBlog() {
         <div id="blog_edit_div">
             <Form method="post">
                 <div id="title_edit_div">
-                    <label htmlFor="edit_title_input">Blog Title</label>
+                    <label htmlFor="edit_title_input">Blog Title:</label>
                     <input id="edit_title_input" name="blog_title_edit" type="text" defaultValue ={blog.title}/>
+                </div>
+                <div id="tags_edit_div">
+                    <label htmlFor="blog_tags">Tags:</label>
+                    <input name="blog_tags" type="textarea" defaultValue={blog.tags} />
                 </div>
                 <div id="body_edit_div">
                 <Editor
@@ -41,7 +46,8 @@ export default function EditBlog() {
                     onInit={(_evt, editor) => editorRef.current = editor}
                     initialValue={`${blog.body}`}
                     init={{
-                        height: 500,
+                        height: "100%",
+                        width: "95%",
                         menubar: {
                         file: { title: 'File', items: 'newdocument restoredraft | preview | importword exportpdf exportword | print | deleteallconversations' },
                         edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
@@ -65,26 +71,28 @@ export default function EditBlog() {
                     }}
                 />
                 </div>
-                <button type="button"
-                 onClick={(e)=> {
-                    e.preventDefault();
-                    let formData = new FormData();
-                    formData.append("blog_body_edit", getMCEData());
-                    formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
-                    formData.append("save_button", true);
-                    submit(formData, {method: "post"});
-                 }}
-                >Save</button>
-                <button type="button"
-                 onClick={(e)=> {
-                    e.preventDefault();
-                    let formData = new FormData();
-                    formData.append("blog_body_edit", getMCEData());
-                    formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
-                    formData.append("finish_button", true);
-                    submit(formData, {method: "post"});
-                 }}
-                >Finish</button>
+                <div id="blog_edit_btns">
+                    <button type="button"
+                     onClick={(e)=> {
+                        e.preventDefault();
+                        let formData = new FormData();
+                        formData.append("blog_body_edit", getMCEData());
+                        formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                        formData.append("save_button", true);
+                        submit(formData, {method: "post"});
+                     }}
+                    >Save</button>
+                    <button type="button"
+                     onClick={(e)=> {
+                        e.preventDefault();
+                        let formData = new FormData();
+                        formData.append("blog_body_edit", getMCEData());
+                        formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                        formData.append("finish_button", true);
+                        submit(formData, {method: "post"});
+                     }}
+                    >Finish</button>
+                </div>
             </Form>
         </div>
     )

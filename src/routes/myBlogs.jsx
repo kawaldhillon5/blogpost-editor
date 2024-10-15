@@ -1,5 +1,6 @@
 import { Link, redirect, useLoaderData, Form, useActionData } from "react-router-dom";
 import { createNewEmptyBlog, getMyBlogs, getUser } from "../helper-functions/functions";
+import "./myBlogs.css"
 
 export async function action() {
     
@@ -23,11 +24,14 @@ export default function MyBlogs(){
     const {blogs} = useLoaderData();
     const error = useActionData();
     return (
-        <div id="all-blogs-div">
+        <div id="blogs_div_main">
             {blogs.length ? (
                     <div id="blogs_div">
-                        <Form method="post"><button type="submit" id="new_blog_button">New Blog</button></Form>
-                        <ul>
+                        <div id="blogs_header">
+                            <div id="blogs_div_title">All Blogs</div>
+                            <Form method="post"><button type="submit" id="new_blog_button">New Blog</button></Form>
+                        </div>
+                        <ul id="blogs_list">
                             {blogs.map(blog =>
                                 (<li key={blog._id}>
                                     <Link to={`../editor/blog/${blog._id}`}>{blog.title}</Link>

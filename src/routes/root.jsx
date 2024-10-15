@@ -36,13 +36,13 @@ export default function Root(){
     return (
         <>
             <div id="header">
-                <h3 id="header_heading">blog Editor</h3>
+                <Link to={"/"} id="header_heading">blog Editor</Link>
                 <form>
                     <input type="search" placeholder="Search Blogs and Requests here" name="header_search"></input>
                 </form>
                 <div id="header_links">
                     <Link to={`/editor/myBlogPosts`}>My Blogs</Link>
-                    <Link to={`/editor/requests`}>Blog Requests</Link>
+                    <Link to={`/editor/requests`}>Requests</Link>
                     <Link to={`/editor/about`}>About</Link>
                     {isLogged ? <button onClick={handleLogOut}>Log Out</button> : <button onClick={handleLogIn}>Log In</button>}
                 </div>

@@ -93,8 +93,11 @@ button:focus-visible {
 
 #header_heading{
   flex: 1;
-  padding:1%;
-  
+  margin-left: 1%;
+  font-size: 30px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 #header_links {
@@ -178,6 +181,7 @@ button:focus-visible {
 .publish_item_user {
   font-style: italic;
   padding-left: 40%;
+  font-size: small;
 }
 
 .editor_req_list_item{
@@ -243,4 +247,159 @@ button:focus-visible {
   background-color: rgb(231, 22, 22);
   border-radius: 10px;
 }
+
+.blog_req_list_item{
+  width: 90%;
+  background-color: #f9f9f911;
+  border-radius: 10px;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.blog_req_item-top{
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog_req_item_title{
+  font-size: larger;
+  font-weight: bold;
+}
+
+.blog_req_item_date{
+  font-style: italic;
+  font-size: small;
+}
+
+.blog_req_item_desc{
+  font-size: small;
+  margin: 1%;
+}
+
+.blog_req_item_user{
+  margin-left: auto;
+  font-size: small;
+  font-style: italic;
+}
+
+#blog_div{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#blog_title_div_edit{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 4fr 0.5fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.blog_title{
+  font-size:450% ;
+  font-weight:500;
+  grid-area: 1/1/2/3;
+}
+
+.blog_date{
+  font-size: 15px;
+}
+
+.blog_edit_form{
+  margin-left: auto;
+  margin-right: 1%;
+}
+#blog_body_div{
+  padding: 1% 5% 1% 5% ;
+}
+
+#blog_author{
+  text-align: end;
+  margin-left: auto;
+  margin-right: 1%;
+  font-style: italic;
+}
+
+#index_div,#login_div{
+  background-color: #f9f9f911;
+  border-radius: 10px;
+  padding: 3%;
+  display: flex;
+  margin: 3%;
+  height: 73%;
+}
+
+#index_left_side,#left_login_div{
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+#index_right_side,#right_login_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  flex-direction: column;
+}
+
+#docu_img{
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+#index_div_wlcm_msg{
+  font-size: 200%;
+  text-align: center;
+}
+
+#index_user_name{
+  font-size: 200%;
+  font-style: italic;
+}
+
+#auth_form_div{
+  font-size: 200%;
+}
+
+#log_in_form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#form_input_div_login{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 120%;
+  border: none;
+}
+
+fieldset>input{
+  font-size: 100%;
+  width: 40%;
+  margin-left: 3%;
+  border: none;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  border-radius: 5px;
+  background-color: #f9f9f911;
+}
+
 

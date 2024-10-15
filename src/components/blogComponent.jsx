@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import AcceptReject from "./acceptRejectComponent";
 import { getBlog, postPublishBlogRequest } from "../helper-functions/functions";
 import HtmlParser from "react-html-parser";
+import "./publish-blog.css";
 
 export async function loader(params) {
     const blog = await getBlog(params.params.blogId);
@@ -21,13 +22,18 @@ export default function BlogComponent() {
     }
 
     return (
-        <div id="blog_div">  
-            <div>
-                {blog.title}   {blog.date_created} 
-                <AcceptReject req={reqId} submitFunc={publishReqOnSubmitFunc} ></AcceptReject>
+        <div id="blog_div_detail_main">  
+            <div id="blog_detail_div">
+                <div id="blog_req_detail_header">
+                    <div id="blog_req_detail_title">{blog.title}</div>
+                    <div id="blog_req_detail_date">{blog.date_created.slice(-24,-14)}</div>
+                </div>
+                    <div id="blog_req_detail_body">{HtmlParser(blog.body)}</div>
+                    <div id="blog_req_detail_author">{`${blog.author.first_name} ${blog.author.last_name}`}</div>
+                    <div id="blog_req_detail_form">
+                        <AcceptReject req={reqId} submitFunc={publishReqOnSubmitFunc} ></AcceptReject>
+                    </div>
             </div>
-                <div id="blog_body_div">{HtmlParser(blog.body)}</div>
-                <p>{`${blog.author.first_name} ${blog.author.last_name}`}</p>
         </div>
 
     )

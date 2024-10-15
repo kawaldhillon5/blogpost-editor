@@ -9,10 +9,13 @@ export default function BlogReq({reqs}) {
                         reqs.length === 0 
                         ? <li className="req_list_item">No Requests</li>
                         : reqs.map((req)=>(
-                            <li className="req_list_item" key={req._id}>
-                                <div className="blog_req_item_title">{req.title} {format(req.date_created, "yyyy/mm/dd")}</div>
-                                <div className="blog_req_item_user">-{req.user}</div>
-                                <div className="blog-req_item_desc">{req.desc}</div>
+                            <li className="blog_req_list_item" key={req._id}>
+                                <div className="blog_req_item-top">
+                                    <div className="blog_req_item_title">{req.title}</div>
+                                    <div className="blog_req_item_date">{format(req.date_created, "yyyy/mm/dd")}</div>
+                                </div>
+                                <div className="blog_req_item_desc">{req.desc}</div>
+                                <div className="blog_req_item_user">-{req.user.userName}</div>
                             </li>
                         ))
                     }
