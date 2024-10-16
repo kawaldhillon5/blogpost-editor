@@ -1,4 +1,4 @@
-import { Link, redirect, useLoaderData, Form, useActionData } from "react-router-dom";
+import { Link, redirect, useLoaderData, Form, useActionData, NavLink, useNavigation } from "react-router-dom";
 import { createNewEmptyBlog, getMyBlogs, getUser } from "../helper-functions/functions";
 import "./myBlogs.css"
 
@@ -23,6 +23,8 @@ export async function loader(){
 export default function MyBlogs(){
     const {blogs} = useLoaderData();
     const error = useActionData();
+    const navigation = useNavigation();
+    
     return (
         <div id="blogs_div_main">
             {blogs.length ? (
@@ -33,9 +35,20 @@ export default function MyBlogs(){
                         </div>
                         <ul id="blogs_list">
                             {blogs.map(blog =>
-                                (<li key={blog._id}>
-                                    <Link to={`../editor/blog/${blog._id}`}>{blog.title}</Link>
-                                    <div className="post-link-author">{blog.author.last_name}</div>
+                                (<li className="blogs_list_item" key={blog._id}>
+                                    <NavLink className={({ isActive, isPending }) =>
+                                            isActive
+                                            ? "blog_list_item_a active"
+                                            : isPending
+                                            ? "blog_list_item_a pending"
+                                            : "blog_list_item_a"
+                                        }to={`../editor/blog/${blog._id}`}>{blog.title}
+                                        <div
+                                        id="search-spinner"
+                                        aria-hidden
+                                        hidden={false}
+                                    />
+                                     </NavLink>
                                 </li>)
                             )}
                         </ul>

@@ -1,4 +1,4 @@
-import { Form, Link, Outlet, useLoaderData, Navigate, useNavigate} from "react-router-dom";
+import { NavLink, Link, Outlet, useLoaderData, Navigate, useNavigate} from "react-router-dom";
 import { getUser, LogOut } from "../helper-functions/functions";
 import { useEffect, useState } from "react";
 
@@ -41,9 +41,27 @@ export default function Root(){
                     <input type="search" placeholder="Search Blogs and Requests here" name="header_search"></input>
                 </form>
                 <div id="header_links">
-                    <Link to={`/editor/myBlogPosts`}>My Blogs</Link>
-                    <Link to={`/editor/requests`}>Requests</Link>
-                    <Link to={`/editor/about`}>About</Link>
+                    <NavLink className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to={`/editor/myBlogPosts`}>My Blogs</NavLink>
+                    <NavLink className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }to={`/editor/requests`}>Requests</NavLink>
+                    <NavLink className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to={`/editor/about`}>About</NavLink>
                     {isLogged ? <button onClick={handleLogOut}>Log Out</button> : <button onClick={handleLogIn}>Log In</button>}
                 </div>
             </div>
