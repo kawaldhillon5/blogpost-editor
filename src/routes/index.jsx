@@ -1,13 +1,9 @@
-import { Link, useLoaderData } from "react-router-dom"
-import { getUser } from "../helper-functions/functions"
+import { Link, useLoaderData, useOutletContext } from "react-router-dom"
 import  documImg from '../assets/images/document-Img.jpg'
  
-export async function loader() {
-    const user = await getUser();
-    return {user}
-}
+
 export default function Index(){
-    const {user} = useLoaderData();
+    const user = useOutletContext();
     return (
         <div id="index_div">
             <div id="index_left_side">

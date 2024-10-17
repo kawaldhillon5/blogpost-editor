@@ -1,6 +1,5 @@
-import { useNavigate, Outlet, useLoaderData, useOutlet, useOutletContext } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getUser } from "../helper-functions/functions";
+import { useNavigate, Outlet, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export default function ProtectedRoute() {

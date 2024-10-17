@@ -2,6 +2,12 @@ import { NavLink, Link, Outlet, useLoaderData, Navigate, useNavigate} from "reac
 import { getUser, LogOut } from "../helper-functions/functions";
 import { useEffect, useState } from "react";
 
+export async function action() {
+    await LogOut();
+    return redirect('/');
+}   
+
+
 export async function loader() {
     const user = await getUser()
     return {user}
@@ -27,12 +33,6 @@ export default function Root(){
         navigate('authenticate/logIn');
     }
 
-    const handleLogOut = async ()=> {
-        LogOut().then(()=>{
-            setIsLogged(false);
-            navigate('/');
-        })
-    }
     return (
         <>
             <div id="header">
@@ -62,7 +62,7 @@ export default function Root(){
                         ? "pending"
                         : ""
                     } to={`/editor/about`}>About</NavLink>
-                    {isLogged ? <button onClick={handleLogOut}>Log Out</button> : <button onClick={handleLogIn}>Log In</button>}
+                    {isLogged ? <Form method="post"><button type="submit">Log Out</button></Form> : <button onClick={handleLogIn}>Log In</button>}
                 </div>
             </div>
             <div id="content">
