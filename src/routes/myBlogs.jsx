@@ -43,12 +43,8 @@ export default function MyBlogs(){
                                             ? "blog_list_item_a pending"
                                             : "blog_list_item_a"
                                         }to={`../editor/blog/${blog._id}`}>{blog.title}
-                                        <div
-                                        id="search-spinner"
-                                        aria-hidden
-                                        hidden={false}
-                                    />
                                      </NavLink>
+                                    <PubReqStatus reqStatus={blog.publishReqStatus} />
                                 </li>)
                             )}
                         </ul>
@@ -63,4 +59,34 @@ export default function MyBlogs(){
         </div>
     )
 
+}
+
+function PubReqStatus({reqStatus}) {
+    let message = null;
+
+    switch (reqStatus) {
+        case 0:
+            message = "Not Sent"
+            break;
+        case 1:
+            message = "Sent";
+        break;
+        case 2:
+            message = "Accepted";
+            break;
+        case 3:
+            message = "Rejected";
+            break;
+        default:
+            message = "Invalid"; // Handle unexpected values
+            break;
+    }
+
+    return (
+        <>
+            <div className={`blog_req_status_main status_color${reqStatus}`}>
+                <p>{message}</p>
+            </div>
+        </>
+    );
 }

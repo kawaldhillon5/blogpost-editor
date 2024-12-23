@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useOutletContext } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 import  documImg from '../assets/images/document-Img.jpg'
  
 
@@ -14,7 +14,7 @@ export default function Index(){
                     Welcome to the Blog Editor
                 </div>
                 {
-                    (user.user === null) ?
+                    (user === null) ?
                     <div id="auth_form_div">
                         <Link to={'/authenticate/logIn'} className="auth_link">Log In</Link>
                     </div> :

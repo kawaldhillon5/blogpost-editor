@@ -22,7 +22,7 @@ export default function LogIn(){
     return (
         <div id="login_div">
             <div id="left_login_div">
-            <img id="docu_img" src={documImg}></img>
+                <img id="docu_img" src={documImg}></img>
             </div>
             <div id="right_login_div">
                 <Form method="post" id="log_in_form">

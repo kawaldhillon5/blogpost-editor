@@ -8,7 +8,7 @@ import './index.css'
 import Root , {loader as rootLoader, action as rootAction}from "./routes/root";
 import ErrorPage from "./erro-page";
 import MyBlogs, {loader as myBlogsLoader, action as blogsAction} from "./routes/myBlogs";
-import Blog, {loader as blogLoader, action as blogAction} from "./routes/blog";
+import Blog, {loader as blogLoader} from "./routes/blog";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/blog-editor";
 import Index from "./routes";
 import LogIn, {action as logInAction} from "./routes/logIn";
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
             path: "editor/blog/:blogId",
             element:<Blog />,
             loader: blogLoader,
-            action: blogAction,
           },
           {
             path: "editor/blogEdit/:blogId",
