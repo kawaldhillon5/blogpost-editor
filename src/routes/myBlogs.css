@@ -10,7 +10,7 @@
     padding: 1%;
     border-radius: 15px;
     background-color: #f9f9f911;
-    width: 70%;
+    width: 90%;
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -37,6 +37,7 @@
 }
 
 #blogs_list{
+    width: 90%;
     overflow: auto;
     font-size: 150%;
     height: 100%;
@@ -48,7 +49,7 @@
 .blogs_list_item{
     width: 95%;
     display: grid;
-    grid-template-columns: 8fr 2fr;
+    grid-template-columns: 7.5fr 1.5fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
 }
@@ -56,6 +57,7 @@
 .blog_req_status_main{
     width: 90%;
     height: 70%;
+    font-size: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,17 +75,51 @@
 
 .status_color3 {
     background-color: #9e100c; /* Reddish for rejected */
-  }
-  
-  .status_color1 {
-    background-color: #c7762a; /* Orange for sent */
-  }
-  
-  .status_color2 {
-    background-color: #258d25; /* Green for accepted */
-  }
-  
-  .status_color0 {
-      background-color: #777; /* Darker grey for not sent */
-  }
+}
 
+.status_color1 {
+    background-color: #c7762a; /* Orange for sent */
+}
+
+.status_color2 {
+    background-color: #258d25; /* Green for accepted */
+}
+  
+.status_color0 {
+    background-color: #777; /* Darker grey for not sent */
+}
+
+.votes_comments_main{
+    width: 90%;
+    height: 70%;
+    font-size: 100%;
+    background-color: #0a9dffa8;
+    border:1px solid rgb(10, 10, 10) ;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.votes_count,.comments_count{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.votes_count::before{
+    margin-left: 20%;
+    margin-right: 10%;
+    width: 40%;
+    content: url('../assets//images/like-svgrepo-com.svg');
+    align-content: center;
+}
+
+.comments_count::before{
+    margin-left: 20%;
+    margin-right: 10%;
+    margin-top: 15%;
+    width: 40%;
+    content: url('../assets//images/comment-svgrepo-com.svg');
+}

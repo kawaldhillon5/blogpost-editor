@@ -44,6 +44,10 @@ export default function MyBlogs(){
                                             : "blog_list_item_a"
                                         }to={`../editor/blog/${blog._id}`}>{blog.title}
                                      </NavLink>
+                                    <div className="votes_comments_main">
+                                        <div className="votes_count">{blog.votes}</div>
+                                        <div className="comments_count">{blog.comments.length}</div>
+                                    </div>
                                     <PubReqStatus reqStatus={blog.publishReqStatus} />
                                 </li>)
                             )}
