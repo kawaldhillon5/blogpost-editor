@@ -29,6 +29,10 @@ export default function Blog(){
                         </div>
                         <div id="del_dia_text"></div>
                     </dialog>
+                    <div className="votes_comments_main_edit_page">
+                        <div className="votes_count">{blog.votes}</div>
+                        <div className="comments_count">{blog.comments.length}</div>
+                    </div>
                 </div>
             </div>
             <div id="blog_body_div">{HtmlParser(blog.body)}</div>

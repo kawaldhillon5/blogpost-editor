@@ -102,6 +102,20 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.votes_comments_main_edit_page{
+    width: 20%;
+    height: 20%;
+    font-size: 100%;
+    background-color: #8a8c8d83;
+    border:1px solid rgb(10, 10, 10) ;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 .votes_count,.comments_count{
     flex: 1;
     display: flex;
