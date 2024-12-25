@@ -6,10 +6,15 @@ import "./blog-editor.css"
 
 export async function action({request, params}){
     const formData = await request.formData();
+    const tagsArray = formData.get("blog_tags").split(',');
+    const tagsArrayTrimmed = tagsArray.map(tag => {
+        return tag.trim();
+    });
+    console.log(tagsArray);
     if(formData.get("save_button")){
-        await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
+        await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit"), tags: tagsArrayTrimmed}, params.blogId);
     } else {
-        await postFinishedblog({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit")}, params.blogId);
+        await postFinishedblog({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit"), tags: tagsArrayTrimmed}, params.blogId);
     }
     return redirect(`/editor/blog/${params.blogId}`)
 }
@@ -38,7 +43,7 @@ export default function EditBlog() {
                 </div>
                 <div id="tags_edit_div">
                     <label htmlFor="blog_tags">Tags:</label>
-                    <input name="blog_tags" type="textarea" defaultValue={blog.tags} />
+                    <input id= "edit_tags_input" name="blog_tags" type="textarea" defaultValue={blog.tags.toString()} />
                 </div>
                 <div id="body_edit_div">
                 <Editor
@@ -79,15 +84,18 @@ export default function EditBlog() {
                         formData.append("blog_body_edit", getMCEData());
                         formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
                         formData.append("save_button", true);
+                        formData.append("blog_tags", document.querySelector("#edit_tags_input").value);
                         submit(formData, {method: "post"});
                      }}
                     >Save</button>
                     <button type="button"
                      onClick={(e)=> {
                         e.preventDefault();
+
                         let formData = new FormData();
                         formData.append("blog_body_edit", getMCEData());
                         formData.append("blog_title_edit",document.querySelector("#edit_title_input").value);
+                        formData.append("blog_tags", document.querySelector("#edit_tags_input").value);
                         formData.append("finish_button", true);
                         submit(formData, {method: "post"});
                      }}
